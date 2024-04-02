@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Новости</title>
+</head>
+<body>
+<h1>Новости</h1>
+<img src="{% static 'images/news.png' %}" alt="новости"  width="600" height="200" >
+<h2>Список новостей по категориям</h2>
+<h3>ШОУ-БИЗНЕС</h3>
+<img src="{% static 'images/show.jpg' %}" alt="шоубизнес" width="300" height="200" >
+
+{% with type1="шоу-бизнес" type2="спорт" type3="культура" %}
+<ul>
+
+        {% for key, value in data.items %}
+            {% if value == type1 %}
+                <li>{{ key }}</li>
+            {% endif %}
+
+        {% endfor %}
+
+</ul>
+<h3>СПОРТ</h3>
+<img src="{% static 'images/sport.jpg' %}" alt="спорт" width="300" height="200">
+<ul>
+
+        {% for key, value in data.items %}
+            {% if value == type2 %}
+                <li>{{ key }}</li>
+            {% endif %}
+
+        {% endfor %}
+
+</ul>
+<h3>КУЛЬТУРА</h3>
+<img src="{% static 'images/culture.jpg' %}" alt="культура" width="300" height="200">
+<ul>
+
+        {% for key, value in data.items %}
+            {% if value == type3 %}
+                <li>{{ key }}</li>
+            {% endif %}
+
+        {% endfor %}
+
+</ul>
+{% endwith %}
+</body>
+</html>
