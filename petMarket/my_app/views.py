@@ -1,5 +1,6 @@
 from django.http import HttpResponse, HttpResponseNotFound
 from django.shortcuts import render
+from .models import Books
 
 # Create your views here.
 
@@ -35,3 +36,14 @@ def page_news(request):
             "Халили выиграл масс старт на чемпионате России по биатлону в Тюмени":"спорт",
             "Вратарь Федотов рассказал, как произошло его расставание с хоккейным ЦСКА":"спорт"}
     return render(request,"news.html", context={"data": data})
+
+def page_books(request):
+    results = Books.objects.all()
+    data = {
+        "book": results
+    }
+    return render(request, "books.html", data)
+
+
+
+    
