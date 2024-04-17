@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Edit Task</title>
+</head>
+<body>
+<div id="">
+    <h2>Ваше текущее задание</h2>
+    <p>{{ id }}: {{ title }}</p>
+    <p>{{ description }}</p>
+    <p>{{ status }}</p>
+    <p>{{ date_created }}</p>
+</div>
+<h2>Отредактировать:</h2>
+<form method="POST" action="/my_app/edit_task/{{ id }}/">
+    {% csrf_token %}
+    <h3>Новое название</h3>
+    <textarea name="title"></textarea> <br>
+    <h3>Новое описание</h3>
+    <textarea name="description"></textarea> <br>
+    <h3>Новый статус</h3>
+     <textarea name="task_s"></textarea> <br>
+    <input type="submit" value="отправить">
+
+
+
+
+</form>
+</body>
+</html>

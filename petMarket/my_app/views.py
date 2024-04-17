@@ -1,6 +1,6 @@
-from django.http import HttpResponse, HttpResponseNotFound
+from django.http import HttpResponse, HttpResponseNotFound, HttpResponseRedirect
 from django.shortcuts import render
-from .models import Books
+from .models import Books, Tasks
 
 # Create your views here.
 
@@ -38,12 +38,97 @@ def page_news(request):
     return render(request,"news.html", context={"data": data})
 
 def page_books(request):
+    if request.method == 'POST':
+        title_book = request.POST.get('book')
+        Books.objects.create(title=title_book)
+        return HttpResponse(f"""
+<h2>Новая книга успешно добавлена</h2>
+<a href=""><button>Вернуться на страницу с книгами</button></a>""")
+    elif request.method == 'GET':
+        results = Books.objects.all()
+        data = {
+            "book": results
+        }
+        return render(request, "books.html", data)
+
+
+def page_editBook(request):
     results = Books.objects.all()
     data = {
         "book": results
     }
     return render(request, "books.html", data)
 
+def page_tasks(request):
+    if request.method == 'POST':
+        title_task = request.POST.get('taskTitle')
+        description_task = request.POST.get('taskDescription')
+        status_task = request.POST.get('taskStatus')
+        Tasks.objects.create(title=title_task, description=description_task, status=status_task)
+        return HttpResponse(f"""
+    <h2>Новое задание успешно добавлено</h2>
+    <a href=""><button>Вернуться на страницу с задачами</button></a>""")
+    elif request.method == 'GET':
+        results = Tasks.objects.all()
+        data = {
+            "task": results
+        }
+        return render(request, "tasks.html", data)
+
+def page_editTask(request, task_id):
+    taskData = Tasks.objects.get(id=task_id)
+    if request.method == "GET":
+        data = {"id": task_id,
+                "text": taskData.title,
+                "description": taskData.description,
+                "status": taskData.status,
+                "date_created": taskData.date_created}
+        return render(request, 'editTask.html', data)
+
+    # ------------------- UPDATE ---------------------#
+    if request.method == 'POST':
+        taskData.title = request.POST.get('title')
+        taskData.description = request.POST.get('description')
+        taskData.status = request.POST.get('description')
+        taskData.save()
+        return HttpResponseRedirect("../../tasks/")
 
 
-    
+
+
+
+
+
+
+
+
+
+
+
+    taskData = Tasks.objects.get(id=task_id)
+    if request.method == 'GET':
+        data = {"id": task_id,
+                "title": taskData.title,
+                "description": taskData.description,
+                "status": taskData.status,
+                "date_created": taskData.date_created}
+        return render(request, "editTask.html", data)
+    if request.method == 'POST':
+
+        title_task = request.POST.get('task_t')
+        title_description = request.POST.get('task_d')
+        title_status = request.POST.get('task_s')
+        taskData.title = title_task
+        taskData.description = title_description
+        taskData.status = title_status
+
+        taskData.objects.save()
+        return HttpResponseRedirect("../../tasks/")
+
+def page_deleteTask(request, task_id):
+    try:
+        task = Tasks.objects.get(id=task_id).delete()
+        return HttpResponseRedirect("../../tasks/")
+    except Tasks.DoesNotExist:
+        return HttpResponseNotFound("""<h2>Task not found</h2>
+        <a href="../../tasks/"><button>Вернуться на страницу с задачами</button></a>""")

@@ -8,13 +8,24 @@
 <body>
 <h1>Книги</h1>
 <img src="{% static 'images/books_shelf.jpg' %}" alt="книги"  width="400" height="500" >
+<h2>Новая книга</h2>
+<form method="POST" action="/my_app/books/">
+    {% csrf_token %}
+    <textarea name="book"></textarea> <br>
+    <input type="submit" value="отправить">
+
+</form>
 {% for el in book %}
+    <div style="background:lightgreen;" id="{{ el.id }}">
     <p>{{ el.title }}</p>
     <p>{{ el.author }}</p>
     <p>{{ el.genre }}</p>
     <p>{{ el.year_of_publication }}</p>
     <p>{{ el.price }}</p>
     <p>{{ el.number_of_copies }}</p>
+        <a href="#"><button>редактировать</button></a>
+        <a href="#"><button>удалить</button></a>
+    </div>
 {% endfor %}
 </body>
 </html>
