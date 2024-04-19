@@ -8,19 +8,31 @@
 <body>
 <h1>Задачи</h1>
 <img src="{% static 'images/task.jpg' %}" alt="задачи"  width="700" height="400" >
+
 <h2>Новая задача:</h2>
-<form method="POST" action="/my_app/tasks/">
-    {% csrf_token %}
-    <h3>Новое название</h3>
-    <textarea name="taskTitle"></textarea>
-    <h3>Новое описание</h3>
-    <textarea name="taskDescription"></textarea>
-    <h3>Новый статус</h3>
-    <textarea name="taskStatus"></textarea><br>
-    <input type="submit" value="отправить">
 
-</form>
+<form method="POST"  novalidate>
+        {% csrf_token %}
 
+        {% for field in add_task_form %}
+
+            {{field.label_tag}}
+            <div>{{field}}</div>
+
+            {% if field.errors%}
+                {% for error in field.errors %}
+                    <div class="alert alert-danger">
+                        {{error}}
+                    </div>
+                {% endfor %}
+            {% endif %}
+
+        {% endfor %}
+
+        <input type="submit" value="Отправить" >
+    </form>
+
+<h2>Задачи:</h2>
 {% for el in task %}
     <div style="background:blue; color:white;" id="{{ el.id }}">
     <p>{{ el.title }}</p>

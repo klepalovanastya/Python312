@@ -11,9 +11,6 @@ urlpatterns = [
     path('edit_books/<int:book_id>/', my_app.page_editBook),
     path('tasks/', my_app.page_tasks),
     path('edit_task/<int:task_id>/', my_app.page_editTask),
-    path('delete_task/<int:task_id>/', my_app.page_deleteTask),
-
-
-
+    path('delete_task/<int:task_id>/', my_app.page_deleteTask)
 
 ]

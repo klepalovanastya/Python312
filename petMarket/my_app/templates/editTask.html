@@ -13,19 +13,31 @@
     <p>{{ date_created }}</p>
 </div>
 <h2>Отредактировать:</h2>
-<form method="POST" action="/my_app/edit_task/{{ id }}/">
-    {% csrf_token %}
-    <h3>Новое название</h3>
-    <textarea name="title"></textarea> <br>
-    <h3>Новое описание</h3>
-    <textarea name="description"></textarea> <br>
-    <h3>Новый статус</h3>
-     <textarea name="task_s"></textarea> <br>
-    <input type="submit" value="отправить">
+    <form method="POST" action="/my_app/edit_task/{{ id }}/">
+        {% csrf_token %}
+
+        {% for field in add_task_form %}
+
+            {{field.label_tag}}
+            <div>{{field}}</div>
+
+            {% if field.errors%}
+                {% for error in field.errors %}
+                    <div class="alert alert-danger">
+                        {{error}}
+                    </div>
+                {% endfor %}
+            {% endif %}
+
+        {% endfor %}
+
+        <input type="submit" value="Отправить" >
+    </form>
 
 
 
 
-</form>
+
+
 </body>
 </html>
