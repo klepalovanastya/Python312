@@ -12,6 +12,6 @@ class Books(models.Model):
 
 class Tasks(models.Model):
     title = models.CharField(max_length=100)
-    description = models.CharField(max_length=200, )
+    description = models.CharField(max_length=200)
     status = models.CharField(max_length=30, null=True)
     date_created = models.DateField(auto_now_add=True)

@@ -19,9 +19,9 @@
             {{field.label_tag}}
             <div>{{field}}</div>
 
-            {% if field.errors%}
+             {% if field.errors%}
                 {% for error in field.errors %}
-                    <div class="alert alert-danger">
+                    <div style="color:red;" class="alert alert-danger">
                         {{error}}
                     </div>
                 {% endfor %}

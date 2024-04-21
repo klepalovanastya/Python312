@@ -61,47 +61,61 @@ def page_editBook(request):
     return render(request, "books.html", data)
 
 def page_tasks(request):
+    results = Tasks.objects.all()
+
+    data = {
+        "task": results,
+        'add_task_form': AddTaskForm()
+    }
+
     if request.method == 'POST':
         # title_task = request.POST.get('title')
         # description_task = request.POST.get('description')
         # status_task = request.POST.get('status')
         # Tasks.objects.create(title=title_task, description=description_task, status=status_task)
         form = AddTaskForm(request.POST)
-        form.save()
-        return HttpResponse(f"""
-        <h2>Новое задание успешно добавлено</h2>
-        <a href=""><button>Вернуться на страницу с задачами</button></a>""")
+        if form.is_valid():
+            form.save()
+            return HttpResponse(f"""
+            <h2>Новое задание успешно добавлено</h2>
+            <a href=""><button>Вернуться на страницу с задачами</button></a>""")
+        else:
+            form.add_error(None, "Ошибка добавления данных")
+            data['add_task_form'] = form
+            return render(request, 'tasks.html', data)
+
     elif request.method == 'GET':
-        results = Tasks.objects.all()
-        data = {
-            "task": results,
-            'add_task_form': AddTaskForm()
-        }
         return render(request, "tasks.html", data)
 
 def page_editTask(request, task_id):
     taskData = Tasks.objects.get(id=task_id)
+    data = {"id": task_id,
+            "text": taskData.title,
+            "description": taskData.description,
+            "status": taskData.status,
+            "date_created": taskData.date_created,
+            'add_task_form': AddTaskForm()
+            }
     if request.method == "GET":
-        data = {"id": task_id,
-                "text": taskData.title,
-                "description": taskData.description,
-                "status": taskData.status,
-                "date_created": taskData.date_created,
-                'add_task_form': AddTaskForm()
-                }
         return render(request, 'editTask.html', data)
 
     # ------------------- UPDATE ---------------------#
     if request.method == 'POST':
-        taskData.title = request.POST.get('title')
-        taskData.description = request.POST.get('description')
-        taskData.status = request.POST.get('description')
-        taskData.save()
-        return HttpResponseRedirect("../../tasks/")
+        form = AddTaskForm(request.POST)
+        if form.is_valid():
+            taskData.title = request.POST.get('title')
+            taskData.description = request.POST.get('description')
+            taskData.status = request.POST.get('status')
+            taskData.save()
+            return HttpResponseRedirect("../../tasks/")
+        else:
+            form.add_error(None, "Ошибка добавления данных")
+            data['add_task_form'] = form
+            return render(request, 'editTask.html', data)
 
 def page_deleteTask(request, task_id):
     try:
-        task = Tasks.objects.get(id=task_id).delete()
+        Tasks.objects.get(id=task_id).delete()
         return HttpResponseRedirect("../../tasks/")
     except Tasks.DoesNotExist:
         return HttpResponseNotFound("""<h2>Task not found</h2>
