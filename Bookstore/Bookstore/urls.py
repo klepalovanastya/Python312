@@ -22,7 +22,8 @@ from django.conf.urls.static import static
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('catalog/', include('catalog.urls')),
+    path('', include('catalog.urls')),
+    path('feedback/', include('feedback.urls')),
 ]
 admin.site.site_header = "Панель администрирования"
 admin.site.index_title = "Книжный магазин 'Лабиринт историй'"
