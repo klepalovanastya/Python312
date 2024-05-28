@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div class="user-name">
+
+        {% if user.is_authenticated %}
+         <li class="last"><a href="http://127.0.0.1:8000/users/account/"> {{user.username}}</a> | <a href="http://127.0.0.1:8000/users/logout/">Выйти</a></li>
+        {% else %}<!-- не авторизован-->
+            <li class="last"><a href="http://127.0.0.1:8000/users/login/">Войти</a> | <a href="http://127.0.0.1:8000/users/register/">Регистрация</a></li>
+        {% endif %}
+
+</div>
+<h2>
+    <a href='{% url "main_url" %}'>Главная</a>
+    {% for section in sections %}
+        <a href='section/{{section.slug}}/'> {{ section.title }} </a>
+    {% endfor %}
+
+
+    </h2>
+
+{% block main_content %}
+<!--Содержимое страницы-->
+
+{% endblock main_content %}
+
+</body>
+</html>
