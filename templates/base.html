@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}" /> <!-- Подключаем внешний CSS -->
+</head>
+<body>
+
+
+
+<!------<h2>
+    <a href='{% url "main_url" %}'>Главная</a>
+    {% for section in sections %}
+        <a href='section/{{section.slug}}/'> {{ section.title }} </a>
+    {% endfor %}
+    </h2>------->
+<!-- навигационное меню -->
+<nav>
+        <div>
+            <div class="logo">
+                <img src="{% static 'images/logo.jpg' %}" alt="логотип">
+            </div>
+
+            <a href="{% url 'catalog' %}">
+                Каталог
+            </a>
+
+            <a href="#">
+                Распрадажа
+            </a>
+
+            <a href="#">
+                Оплата и доставка
+            </a>
+
+            <a href="#">
+                О нас
+            </a>
+
+
+        </div>
+
+
+        <div class="icons">
+            <div class="search_container">
+                <form action="#">
+                    <input type="text" placeholder="Поиск..." name="search">
+                    <button type="submit"><i class="fa fa-search"></i></button>
+                </form>
+            </div>
+
+            {% if user.is_authenticated %}
+            <a href="{% url 'profile' %}"> {{user.username}} <img src="{% static 'images/profile.png' %}" alt="профиль" class="auto"></a> | <a href="{% url 'logout' %}">Выйти</a>
+            {% else %}<!-- не авторизован-->
+            <a href="{% url 'login' %}"><img src="{% static 'images/log_in.png' %}" alt="вход" class="auto"></a> | <a href="{% url 'register' %}">Регистрация</a>
+            {% endif %}
+
+            <img src="{% static 'images/favourites.png' %}" alt="избранное" class="auto">
+            <img src="{% static 'images/basket.png' %}" alt="корзина" class="auto">
+
+        </div>
+
+    </nav>
+
+
+<!-- Поиск -->
+
+
+
+
+
+
+{% block main_content %}
+<!--Содержимое страницы-->
+
+{% endblock main_content %}
+
+</body>
+</html>
