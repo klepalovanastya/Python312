@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+{% load static %}
+
+
+{% block style %}
+    <link rel="stylesheet" href="{% static 'css/style-sections.css' %}" />
+{% endblock  %}
+
+
+
+{% block title %}
+    <title>Разделы</title>
+{% endblock  %}
+
+{% block main_content %}
+<section>
+    {% for section in sections %}
+           <div class="sect" ><a href="../../sections/{{section.slug}}"><p>{{section}}</p></a></div>
+    {% endfor %}
+</section>
+{% endblock main_content %}
+
