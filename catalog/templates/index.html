@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}
+    <title>Главная страница</title>
+{% endblock  %}
+{% block main_content %}
+
+
+<section class="one">
+        <div>
+
+            <div class="slogan">
+                Погрузитесь в мир, где каждый поворот открывает новую страницу
+
+            </div>
+            <div lass="naz">
+                -Лабиринт историй.
+            </div>
+
+
+
+        </div>
+
+        <div>
+            <img src="{% static 'images/лабиринт.png' %}" alt="лабиринт">
+
+        </div>
+
+    </section>
+
+{% endblock main_content %}
+
