@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block style %}
+    <link rel="stylesheet" href="{% static 'css/style-profile.css' %}" />
+{% endblock  %}
+
+{% block title %}
+    <title>Профиль</title>
+{% endblock  %}
+
+{% block main_content %}
+<ul>
+  <li><a href="{% url 'profile_persData' %}">Личная информация</a></li>
+  <li><a href="#">Мои заказы</a></li>
+  <li><a href="#">Избранное</a></li>
+  <li><a href="{% url 'logout' %}">Выйти</a></li>
+</ul>
+
+
+
+
+{% endblock main_content %}
+
+{% block prof_content %}
+<!--Содержимое страницы-->
+
+{% endblock prof_content %}

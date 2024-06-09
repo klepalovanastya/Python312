@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+     {% block title %}
+     {% endblock %}
+    <link rel="stylesheet" href="{% static 'css/style.css' %}" /><!-- Подключаем внешний CSS -->
+     {% block style %}
+     {% endblock %}
+</head>
+<body>
+
+<nav>
+        <div>
+            <div class="logo">
+                <a href="{% url 'main_url' %}"><img src="{% static 'images/logotip.jpg' %}" alt="логотип"></a>
+            </div>
+
+            <a href="{% url 'sections' %}">
+                Каталог
+            </a>
+
+            <a href="#">
+                Распрадажа
+            </a>
+
+            <a href="#">
+                Оплата и доставка
+            </a>
+
+            <a href="{% url 'about_us' %}">
+                О нас
+            </a>
+
+
+        </div>
+
+
+        <div class="icons">
+            <div class="search_container">
+                <form action="#">
+                    <input type="text" placeholder="Поиск..." name="search">
+                    <button type="submit"><i class="fa fa-search"></i></button>
+                </form>
+            </div>
+
+            {% if user.is_authenticated %}
+            <a href="{% url 'profile' %}"> {{user.username}} <img src="{% static 'images/profile.png' %}" alt="профиль" class="auto"></a>
+            {% else %}<!-- не авторизован-->
+            <a href="{% url 'login' %}"><img src="{% static 'images/log_in.png' %}" alt="вход" class="auto"></a>
+            {% endif %}
+
+            <img src="{% static 'images/favourites.png' %}" alt="избранное" class="auto">
+            <img src="{% static 'images/basket.png' %}" alt="корзина" class="auto">
+
+        </div>
+
+    </nav>
+
+
+<!-- Поиск -->
+
+
+
+
+
+
+{% block main_content %}
+<!--Содержимое страницы-->
+
+{% endblock main_content %}
+
+</body>
+</html>

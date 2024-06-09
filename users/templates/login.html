@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+{% load static %}
+
+
+{% block style %}
+    <link rel="stylesheet" href="{% static 'css/style-login-reg.css' %}" />
+{% endblock  %}
+
+
+
+{% block title %}
+    <title>Авторизация</title>
+{% endblock  %}
+
+{% block main_content %}
+
+<div class="login-page">
+  <div class="form">
+    <form class="login-form" method="post" action="{% url 'login' %}">
+        <h1>{{ title }}</h1>
+      {% csrf_token %}
+        {{ form.as_p }}
+      <p><button class="btn" type="submit">Войти</button></p>
+      <p class="message">Нет учетной записи? <a href="{% url 'register' %}">Регистрация</a></p>
+    </form>
+  </div>
+</div>
+
+{% endblock main_content %}

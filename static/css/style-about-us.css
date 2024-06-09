@@ -1,0 +1,32 @@
+h4{
+    text-transform: uppercase;
+}
+
+.priv {
+    text-align: center;
+    color: #1E90FF;
+    font-size: 26px;
+    font-weight: bold;
+    margin-top: 3%;
+}
+
+.osnova, ol {
+    text-align: justify;
+    margin: 20px 40px;
+}
+
+.poka {
+    text-align: center;
+    font-weight: bold;
+    font-size: 22px;
+    margin-top: 3%;
+}
+
+li p{
+    color: #32CD32;
+    font-weight: bold;
+}
+
+.list{
+    text-align: center;
+}

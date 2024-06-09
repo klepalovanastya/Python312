@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+{% load static %}
+
+
+{% block style %}
+    <link rel="stylesheet" href="{% static 'css/style-login-reg.css' %}" />
+{% endblock  %}
+
+
+{% block title %}
+    <title>Регистрация</title>
+{% endblock  %}
+
+{% block main_content %}
+
+<div class="register-page">
+  <div class="form">
+    <form class="register-form" method="post">
+        <h1>{{ title }}</h1>
+      {% csrf_token %}
+
+    <input type="hidden" name="next" value="{{ next }}" />
+    <div class="form-error">{{ form.non_field_errors }}</div>
+
+    {% for f in form %}
+    <p><label class="form-label" for="{{ f.id_for_label }}">{{f.label}}: </label>{{ f }}</p>
+    <div class="form-error">{{ f.errors }}</div>
+    {% endfor %}
+      <p><button class="btn" type="submit">Регистрация</button></p>
+      <p class="message">Уже есть учетная запись? <a href="{% url 'login' %}">Войти</a></p>
+    </form>
+  </div>
+</div>
+
+{% endblock main_content %}
