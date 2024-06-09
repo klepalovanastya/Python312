@@ -1,26 +1,33 @@
-<!DOCTYPE html>
 {% extends "base.html" %}
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>{{title}}</title>
-</head>
-<body>
+{% load static %}
 
-
-ГЛАВНАЯ СТРАНИЦА
+{% block title %}
+    <title>Главная страница</title>
+{% endblock  %}
 {% block main_content %}
 
 
-<!--<form method="get" action="petGET/">-->
-<!-- <label for="search">Search :</label>-->
-<!--  <input type="search" id="search" name="search_field"> &lt;!&ndash;name - параметр запроса&ndash;&gt;-->
-<!--  <input type="submit" value="Submit">-->
-<!--</form>-->
+<section class="one">
+        <div>
 
-<!-- <input type="text" id="smthfield" name="smthfield" value="something">-->
-<!--<a href="petGET/?smthfield=something"> <input type="submit" value="Submit"></a> &lt;!&ndash;js од для получения значения value&ndash;&gt;-->
+            <div class="slogan">
+                Погрузитесь в мир, где каждый поворот открывает новую страницу
+
+            </div>
+            <div lass="naz">
+                -Лабиринт историй.
+            </div>
+
+
+
+        </div>
+
+        <div>
+            <img src="{% static 'images/лабиринт.png' %}" alt="лабиринт">
+
+        </div>
+
+    </section>
+
 {% endblock main_content %}
 
-</body>
-</html>
